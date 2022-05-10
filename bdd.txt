@@ -2,3 +2,4 @@ usuario:b0567052f9a32f
 contraseña:ca5b08c7
 servidor:eu-cdbr-west-02.cleardb.net
 dbname:heroku_603b47785fdb138
+url:mysql://b0567052f9a32f:ca5b08c7@eu-cdbr-west-02.cleardb.net/heroku_603b47785fdb138?reconnect=true
