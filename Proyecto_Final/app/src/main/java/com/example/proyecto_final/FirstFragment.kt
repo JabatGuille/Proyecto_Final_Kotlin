@@ -10,12 +10,16 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.databinding.FragmentFirstBinding
 
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.SQLException
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
+    private var url = "jdbc:mysql://localhost:8080/"
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -52,5 +56,21 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    fun conexionBBDD(){
+        var con: Connection? = null
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance()
+            con = DriverManager.getConnection(url, "root", "root")
+            println("Conectando a BBDD")
+            con.close()
+        }catch (e : SQLException){
+            println("1")
+            println(e.errorCode)
+            println("2")
+            println(e.message)
+            println("3")
+            println(e.sqlState)
+        }
     }
 }
