@@ -1,0 +1,4 @@
+usuario:b0567052f9a32f
+contraseña:ca5b08c7
+servidor:eu-cdbr-west-02.cleardb.net
+dbname:heroku_603b47785fdb138
