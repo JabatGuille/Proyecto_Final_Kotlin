@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Guillermo/Kotlin/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Gilo/Documents/repositorios/Aliexpress/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/activity_main.xml" value="0.17119565217391305" />
+        <entry key="..\:/Users/Gilo/Documents/repositorios/Aliexpress/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/content_main.xml" value="0.264" />
+        <entry key="..\:/Users/Gilo/Documents/repositorios/Aliexpress/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/fragment_first.xml" value="0.2" />
+        <entry key="..\:/Users/Gilo/Documents/repositorios/Aliexpress/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/fragment_second.xml" value="0.13451086956521738" />
+        <entry key="..\:/Users/Gilo/Documents/repositorios/Aliexpress/Proyecto_Final_Kotlin/Proyecto_Final/app/src/main/res/layout/fragment_third.xml" value="0.2" />
       </map>
     </option>
   </component>
