@@ -9,17 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.databinding.FragmentFirstBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
 
+    private val db = FirebaseFirestore.getInstance()
+
     private var _binding: FragmentFirstBinding? = null
-    private var url = "jdbc:mysql://localhost:8080/"
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -36,7 +35,6 @@ class FirstFragment : Fragment() {
         return binding.root
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,12 +42,48 @@ class FirstFragment : Fragment() {
 
         setHasOptionsMenu(true)
         activity?.title = "Registro"
-        binding.btnLogInFirst.setOnClickListener{
+        binding.btnLogInFirst.setOnClickListener {
             findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
             this.onDestroyView()
+        }
+        binding.btnRegistroFirst.setOnClickListener {
+            if (binding.editTextEmail.text.toString().isNotEmpty()) {
+                if (binding.editTextPass.text.toString().isNotEmpty()) {
+                    if (binding.editTextPass2.text.toString().isNotEmpty()) {
+                        if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
+                            db.collection("users").document(binding.editTextEmail.text.toString())
+                                .get()
+                                .addOnSuccessListener {
+                                    if (binding.editTextEmail.text.toString() == it.get("email")) {
+                                        binding.editTextEmail.setText("")
+                                        print("El email ya existe")
+                                        } else {
+                                        db.collection("users")
+                                            .document(binding.editTextEmail.text.toString())
+                                            .set(
+                                                hashMapOf(
+                                                    "email" to binding.editTextEmail.text.toString(),
+                                                    "password" to binding.editTextPass.text.toString()
+                                                )
+                                            )
+                                        findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                    }
+                                }
 
-
-
+                        } else {
+                            binding.editTextPass.setText("")
+                            binding.editTextPass2.setText("")
+                            print("Contraseñas no coinciden")
+                        }
+                    } else {
+                        print("Falta repetir contraseña")
+                    }
+                } else {
+                    println("Falta contraseña")
+                }
+            } else {
+                println("Falta email")
+            }
         }
     }
 
@@ -57,20 +91,8 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-    fun conexionBBDD(){
-        var con: Connection? = null
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance()
-            con = DriverManager.getConnection(url, "root", "root")
-            println("Conectando a BBDD")
-            con.close()
-        }catch (e : SQLException){
-            println("1")
-            println(e.errorCode)
-            println("2")
-            println(e.message)
-            println("3")
-            println(e.sqlState)
-        }
-    }
 }
+
+
+
+
