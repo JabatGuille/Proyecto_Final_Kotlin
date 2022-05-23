@@ -6,16 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.FragmentThirdBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class ThirdFragment : Fragment() {
 
-    private val db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentThirdBinding? = null
 
@@ -47,19 +46,16 @@ class ThirdFragment : Fragment() {
             if (binding.editTextEmail1.text.toString()
                     .isNotEmpty() && binding.editTextPass1.text.toString().isNotEmpty()
             ) {
-                db.collection("users").document(binding.editTextEmail1.text.toString()).get()
-                    .addOnSuccessListener {
-                        if (binding.editTextEmail1.text.toString() == it.get("email") && binding.editTextPass1.text.toString() == it.get(
-                                "password"
-                            )
-                        ) {
-                            findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
-
-                        }else{
-                            print("Email o contraseña incorrectos")
-                        }
-                    }
-            }else{
+                if (BBDD().login_usuario(
+                        binding.editTextEmail1.text.toString(),
+                        binding.editTextPass1.text.toString()
+                    )
+                ) {
+                    findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
+                } else {
+                    print("Email o contraseña incorrectos")
+                }
+            } else {
                 print("Falta email o contraseña")
             }
         }

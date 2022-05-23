@@ -1,5 +1,7 @@
 package com.example.proyecto_final.Modelo
 
+import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BBDD {
@@ -26,6 +28,17 @@ class BBDD {
                     bol = false
                 }
 
+            }
+        return bol
+    }
+
+    fun login_usuario(email: String, pass: String): Boolean {
+        var bol = false
+        db.collection("users").document(email).get()
+            .addOnSuccessListener {
+                bol = email == it.get("email") && pass == it.get(
+                    "password"
+                )
             }
         return bol
     }
