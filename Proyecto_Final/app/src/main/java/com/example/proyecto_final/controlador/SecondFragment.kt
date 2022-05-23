@@ -1,4 +1,4 @@
-package com.example.proyecto_final
+package com.example.proyecto_final.controlador
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

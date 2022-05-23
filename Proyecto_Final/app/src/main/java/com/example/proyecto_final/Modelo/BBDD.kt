@@ -1,4 +1,4 @@
-package com.example.proyecto_final
+package com.example.proyecto_final.Modelo
 
 import com.google.firebase.firestore.FirebaseFirestore
 
