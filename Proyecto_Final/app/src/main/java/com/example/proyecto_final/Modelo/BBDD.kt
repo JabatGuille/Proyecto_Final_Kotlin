@@ -1,7 +1,5 @@
 package com.example.proyecto_final.Modelo
 
-import androidx.navigation.fragment.findNavController
-import com.example.proyecto_final.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BBDD {
@@ -42,4 +40,9 @@ class BBDD {
             }
         return bol
     }
+
+    fun ver_pedidos() {}
+    fun hacer_pedido() {}
+    fun mostrar_objetos() {}
+
 }
