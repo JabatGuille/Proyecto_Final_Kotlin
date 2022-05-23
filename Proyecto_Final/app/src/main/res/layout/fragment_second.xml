@@ -6,22 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageLogo2"
+        android:layout_width="329dp"
+        android:layout_height="215dp"
+        android:src="@drawable/meretrizbywpng"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:srcCompat="@drawable/meretrizbywpng" />
+
+    <Button
+        android:id="@+id/btnVerPedidos"
+        android:layout_width="280dp"
+        android:layout_height="81dp"
+        android:background="#373737"
+        android:shadowColor="#373737"
+        android:text="Ver pedidos"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="#373737"
+        android:textColorLink="#3F51B5"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.829"
+        app:rippleColor="#373737"
+        app:strokeColor="#373737" />
+
+    <Button
+        android:id="@+id/btnHacerPedidos"
+        android:layout_width="287dp"
+        android:layout_height="109dp"
+        android:background="#373737"
+        android:shadowColor="#373737"
+        android:text="Hacer pedidos"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="#373737"
+        android:textColorLink="#3F51B5"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.639"
+        app:rippleColor="#373737"
+        app:strokeColor="#373737" />
+
     <TextView
         android:id="@+id/textview_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
 </androidx.constraintlayout.widget.ConstraintLayout>
