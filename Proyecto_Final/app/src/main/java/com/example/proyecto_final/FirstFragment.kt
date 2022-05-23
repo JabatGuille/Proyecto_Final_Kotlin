@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.databinding.FragmentFirstBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
-
-    private val db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -49,25 +46,17 @@ class FirstFragment : Fragment() {
                 if (binding.editTextPass.text.toString().isNotEmpty()) {
                     if (binding.editTextPass2.text.toString().isNotEmpty()) {
                         if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
-                            db.collection("users").document(binding.editTextEmail.text.toString())
-                                .get()
-                                .addOnSuccessListener {
-                                    if (binding.editTextEmail.text.toString() == it.get("email")) {
-                                        binding.editTextEmail.setText("")
-                                        print("El email ya existe")
-                                        } else {
-                                        db.collection("users")
-                                            .document(binding.editTextEmail.text.toString())
-                                            .set(
-                                                hashMapOf(
-                                                    "email" to binding.editTextEmail.text.toString(),
-                                                    "password" to binding.editTextPass.text.toString()
-                                                )
-                                            )
-                                        findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
-                                    }
-                                }
-
+                            if (BBDD().guardar_usuario(
+                                    binding.editTextEmail.text.toString(),
+                                    binding.editTextPass.text.toString()
+                                )
+                            ) {
+                                print("Email ya existe")
+                                binding.editTextEmail.setText("")
+                            } else {
+                                print("Usuario creado")
+                                findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                            }
                         } else {
                             binding.editTextPass.setText("")
                             binding.editTextPass2.setText("")
@@ -79,6 +68,7 @@ class FirstFragment : Fragment() {
                 } else {
                     println("Falta contraseña")
                 }
+
             } else {
                 println("Falta email")
             }
@@ -90,6 +80,7 @@ class FirstFragment : Fragment() {
         _binding = null
     }
 }
+
 
 
 
