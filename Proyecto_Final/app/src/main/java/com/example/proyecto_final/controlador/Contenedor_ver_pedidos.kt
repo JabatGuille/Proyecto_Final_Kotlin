@@ -33,9 +33,10 @@ class Contenedor_ver_pedidos : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = "Ver Pedidos"
         miRecyclerView = binding.frag3RecyclerView
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
-        miRecyclerView.adapter = Adaptador((activity as MainActivity).datosView.objetos, this)
+        miRecyclerView.adapter = Adatador_ver_pedidos((activity as MainActivity).datosView.objetos, this)
 
     }
 

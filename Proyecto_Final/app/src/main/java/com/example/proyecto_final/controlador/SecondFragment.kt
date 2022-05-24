@@ -32,7 +32,7 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        activity?.title = "Opciones"
         binding.btnHacerPedidos.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_recyclerview_hacer_pedido)
 

@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.BBDD
-import com.example.proyecto_final.Modelo.Objetos
+import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorBinding
 
 /**
@@ -35,11 +36,18 @@ class Contenedor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = "Hacer Pedido"
         miRecyclerView = binding.frag2RecyclerView
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
-        miRecyclerView.adapter = Adaptador((activity as MainActivity).datosView.objetos, this)
+        miRecyclerView.adapter = Adaptador(
+            (activity as MainActivity).datosView.objetos,
+            this,
+            (activity as MainActivity).datosView
+        )
 
         binding.butcompra.setOnClickListener {
+            BBDD().hacer_pedido((activity as MainActivity).datosView.lista_pedido,(activity as MainActivity).datosView.usuario.email)
+            findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
 
         }
     }
