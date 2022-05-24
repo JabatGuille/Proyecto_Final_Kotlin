@@ -4,19 +4,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.R
 
-class Adaptador(var datos: MutableList<Objetos>, val fragmento: Fragment) :
-    RecyclerView.Adapter<Adaptador.ViewHolder>() {
+
+class Adatador_ver_pedidos(var datos: MutableList<Objetos>, val fragmento: Fragment) :
+    RecyclerView.Adapter<Adatador_ver_pedidos.ViewHolder>() {
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var nombre: TextView = v.findViewById(R.id.textObjeto)
-        var cantidad: EditText = v.findViewById(R.id.editTextCantidad)
+        var posicion:Int=-2
+        var boton: Button =v.findViewById(R.id.boton_ver_pedido)
+
+        init {
+            boton.setOnClickListener {
+                val bundle = bundleOf("id" to this.posicion)
+                fragmento.findNavController().navigate(R.id.action_recyclerview_ver_pedidos_to_SecondFragment,bundle)
+
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +34,7 @@ class Adaptador(var datos: MutableList<Objetos>, val fragmento: Fragment) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nombre.setText(datos[position].nombre+ " "+datos[position].precio.toString()+"€")
+        holder.posicion=position
     }
 
     override fun getItemCount(): Int {

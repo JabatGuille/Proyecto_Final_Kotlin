@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextCantidad"
         android:layout_width="114dp"
         android:layout_height="46dp"
         android:ems="10"

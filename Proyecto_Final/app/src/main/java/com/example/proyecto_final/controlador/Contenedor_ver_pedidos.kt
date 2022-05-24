@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto_final.Modelo.BBDD
-import com.example.proyecto_final.Modelo.Objetos
-import com.example.proyecto_final.databinding.ContendorBinding
+import com.example.proyecto_final.databinding.ContendorVerPedidoBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class Contenedor : Fragment() {
+class Contenedor_ver_pedidos : Fragment() {
 
-    private var _binding: ContendorBinding? = null
+    private var _binding: ContendorVerPedidoBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,20 +26,17 @@ class Contenedor : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = ContendorBinding.inflate(inflater, container, false)
+        _binding = ContendorVerPedidoBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        miRecyclerView = binding.frag2RecyclerView
+        miRecyclerView = binding.frag3RecyclerView
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
         miRecyclerView.adapter = Adaptador((activity as MainActivity).datosView.objetos, this)
 
-        binding.butcompra.setOnClickListener {
-
-        }
     }
 
     override fun onDestroyView() {

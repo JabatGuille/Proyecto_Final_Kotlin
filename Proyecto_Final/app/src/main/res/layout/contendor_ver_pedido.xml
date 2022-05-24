@@ -4,23 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controlador.Contenedor">
+    tools:context=".controlador.Contenedor_ver_pedidos">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/frag2_recyclerView"
-        android:layout_width="412dp"
-        android:layout_height="517dp"
+        android:id="@+id/frag3_recyclerView"
+        android:layout_width="408dp"
+        android:layout_height="890dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/butcompra"
-        android:layout_width="156dp"
-        android:layout_height="82dp"
-        android:text="Comprar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frag2_recyclerView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

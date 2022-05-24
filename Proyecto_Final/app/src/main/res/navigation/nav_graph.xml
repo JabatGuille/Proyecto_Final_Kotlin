@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_recyclerview_hacer_pedido"
             app:destination="@id/recyclerview_hacer_pedido" />
+        <action
+            android:id="@+id/action_SecondFragment_to_recyclerview_ver_pedidos"
+            app:destination="@id/recyclerview_ver_pedidos" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
@@ -39,11 +42,20 @@
     <fragment
         android:id="@+id/recyclerview_hacer_pedido"
         android:name="com.example.proyecto_final.controlador.Contenedor"
-        android:label="fragment_first"
+        android:label="recyclerview_hacer_pedido"
         tools:layout="@layout/recyclerview_hacer_pedido" >
 
         <action
             android:id="@+id/action_recyclerview_hacer_pedido_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recyclerview_ver_pedidos"
+        android:name="com.example.proyecto_final.controlador.Contenedor_ver_pedidos"
+        android:label="recycler_view_ver_pedido"
+        tools:layout="@layout/recyclerview_ver_pedidos" >
+        <action
+            android:id="@+id/action_recyclerview_ver_pedidos_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 
