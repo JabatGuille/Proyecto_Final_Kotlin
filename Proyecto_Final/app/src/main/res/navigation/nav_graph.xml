@@ -20,6 +20,9 @@
         android:label="fragment_first"
         tools:layout="@layout/fragment_second" >
 
+        <action
+            android:id="@+id/action_SecondFragment_to_recyclerview_hacer_pedido"
+            app:destination="@id/recyclerview_hacer_pedido" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
@@ -31,6 +34,16 @@
             app:destination="@id/firstFragment" />
         <action
             android:id="@+id/action_thirdFragment_to_SecondFragment2"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recyclerview_hacer_pedido"
+        android:name="com.example.proyecto_final.controlador.Contenedor"
+        android:label="fragment_first"
+        tools:layout="@layout/recyclerview_hacer_pedido" >
+
+        <action
+            android:id="@+id/action_recyclerview_hacer_pedido_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 

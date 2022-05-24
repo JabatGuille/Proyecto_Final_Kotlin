@@ -1,6 +1,9 @@
 package com.example.proyecto_final.Modelo
 
+import com.example.proyecto_final.controlador.MainActivity
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class BBDD {
 
@@ -31,7 +34,7 @@ class BBDD {
     }
 
     fun login_usuario(email: String, pass: String): Boolean {
-        var bol = false
+        var bol = true
         db.collection("users").document(email).get()
             .addOnSuccessListener {
                 bol = email == it.get("email") && pass == it.get(
@@ -43,6 +46,14 @@ class BBDD {
 
     fun ver_pedidos() {}
     fun hacer_pedido() {}
-    fun mostrar_objetos() {}
-
+    fun mostrar_objetos(datosView: DatosView) {
+        db.collection("objetos").get().addOnSuccessListener {
+            for (item in it.documents) {
+                val objeto = Objetos(
+                    item.get("nombre") as String, item.getDouble("precio") as Double
+                )
+                datosView.objetos.add(objeto)
+            }
+        }
+    }
 }

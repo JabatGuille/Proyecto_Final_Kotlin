@@ -1,4 +1,5 @@
 package com.example.proyecto_final.Modelo
 
-class Objetos(var nombre: String) {
+class Objetos(var nombre: String, var precio:Double) {
+
 }

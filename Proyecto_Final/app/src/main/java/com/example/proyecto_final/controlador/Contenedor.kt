@@ -5,38 +5,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.proyecto_final.R
-import com.example.proyecto_final.databinding.FragmentSecondBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto_final.Modelo.BBDD
+import com.example.proyecto_final.Modelo.Objetos
+import com.example.proyecto_final.databinding.ContendorBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class Contenedor : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: ContendorBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    lateinit var miRecyclerView: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = ContendorBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.btnHacerPedidos.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_recyclerview_hacer_pedido)
-
-        }
+        miRecyclerView = binding.frag2RecyclerView
+        miRecyclerView.layoutManager = LinearLayoutManager(activity)
+        miRecyclerView.adapter = Adaptador((activity as MainActivity).datosView.objetos, this)
     }
 
     override fun onDestroyView() {
