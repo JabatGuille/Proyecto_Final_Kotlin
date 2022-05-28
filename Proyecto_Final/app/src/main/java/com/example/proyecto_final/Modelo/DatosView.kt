@@ -6,8 +6,8 @@ class DatosView : ViewModel() {
     var lista_pedido = HashMap<String, Pedido>()
     lateinit var usuario: Usuarios
 
-    fun añadir_cantidad(nombre: String, precio: Double, cantidad: Int) {
-        lista_pedido.put(nombre, Pedido(nombre, precio, cantidad))
+    fun añadir_cantidad(nombre: String, cantidad: Int, precio: Double) {
+        lista_pedido.put(nombre, Pedido(nombre, cantidad,precio))
     }
 
     fun guardar_usuario(email: String) {

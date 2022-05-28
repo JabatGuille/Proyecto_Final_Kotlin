@@ -75,6 +75,7 @@ class ThirdFragment : Fragment() {
                         binding.editTextPass1.setText("")
                         Log.d("", "Email o contraseña incorrectos")
                     } else {
+                        (activity as MainActivity).datosView.guardar_usuario(email)
                         findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
                     }
                 }

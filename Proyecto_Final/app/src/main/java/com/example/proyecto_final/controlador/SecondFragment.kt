@@ -37,6 +37,9 @@ class SecondFragment : Fragment() {
             findNavController().navigate(R.id.action_SecondFragment_to_recyclerview_hacer_pedido)
 
         }
+        binding.btnVerPedidos.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_recyclerview_ver_pedidos)
+        }
     }
 
     override fun onDestroyView() {

@@ -26,16 +26,22 @@ class BBDD {
     }
 
     fun hacer_pedido(listaPedido: HashMap<String, Pedido>, email: String) {
+        var total = 0.0
+        for (objeto in listaPedido.values){
+            total += objeto.cantidad * objeto.precio
+        }
         var data = LocalDateTime.now().toString()
         var hasmap = hashMapOf("fecha" to data)
         listaPedido.values.forEach {
             if (it.cantidad > 0) {
                 hasmap.put(it.nombre, it.cantidad.toString())
             }
+            hasmap.put("email",email)
+            hasmap.put("total",total.toString())
         }
         db.collection("users").document(email).get()
             .addOnSuccessListener {
-                db.collection("pedidos").document(email + data).set(hasmap)
+                db.collection("pedidos").document().set(hasmap)
             }
 
     }

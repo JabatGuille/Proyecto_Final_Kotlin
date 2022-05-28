@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.DatosView
 import com.example.proyecto_final.Modelo.Objetos
@@ -23,7 +21,7 @@ class Adaptador(
         var cantidad: EditText = v.findViewById(R.id.editTextCantidad)
         var boton: Button = v.findViewById(R.id.btn_añadir)
         var posicion = -1
-
+var precio:Double = 0.00
 
         init {
 
@@ -31,8 +29,9 @@ class Adaptador(
                 if (cantidad.text.toString() != "") {
                         datosView.añadir_cantidad(
                             datos[posicion].nombre,
-                            datos[posicion].precio,
-                            cantidad.text.toString().toInt()
+                            cantidad.text.toString().toInt(),
+                            precio
+
                         )
                 }
             }
@@ -50,6 +49,7 @@ class Adaptador(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.nombre.setText(datos[position].nombre + " " + datos[position].precio.toString() + "€")
         holder.posicion = position
+        holder.precio = datos[position].precio.toDouble()
     }
 
     override fun getItemCount(): Int {

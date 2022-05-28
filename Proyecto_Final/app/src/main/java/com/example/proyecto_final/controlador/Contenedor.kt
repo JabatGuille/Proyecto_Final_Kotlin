@@ -46,8 +46,9 @@ class Contenedor : Fragment() {
             var objetos: MutableList<Objetos> = mutableListOf()
             db.collection("objetos").get().addOnSuccessListener {
                 for (item in it.documents) {
+                    var precio = item.getDouble("precio") as Double
                     val objeto = Objetos(
-                        item.get("nombre") as String, item.getDouble("precio") as Double
+                        item.get("nombre") as String, precio.toString()
                     )
                     objetos.add(objeto)
                 }
@@ -66,6 +67,7 @@ class Contenedor : Fragment() {
                         (activity as MainActivity).datosView.lista_pedido,
                         (activity as MainActivity).datosView.usuario.email
                     )
+                    findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
                 } else {
                     Log.d("","No hay nada en el carrito, redirigiendo")
                     findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
