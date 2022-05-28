@@ -72,7 +72,7 @@ class FirstFragment : Fragment() {
                                                 bol = false
                                             }
                                         }
-                                    delay(3000L)
+                                    delay(1000L)
                                     if (bol) {
                                         binding.editTextEmail.setText("")
                                         Log.d("", "Email ya existe")

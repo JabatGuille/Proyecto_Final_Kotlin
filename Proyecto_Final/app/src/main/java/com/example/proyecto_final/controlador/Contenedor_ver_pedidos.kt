@@ -36,7 +36,7 @@ class Contenedor_ver_pedidos : Fragment() {
         activity?.title = "Ver Pedidos"
         miRecyclerView = binding.frag3RecyclerView
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
-        miRecyclerView.adapter = Adatador_ver_pedidos((activity as MainActivity).datosView.objetos, this)
+      //  miRecyclerView.adapter = Adatador_ver_pedidos((activity as MainActivity).datosView.objetos, this)
 
     }
 

@@ -50,10 +50,10 @@ class ThirdFragment : Fragment() {
             if (binding.editTextEmail1.text.toString()
                     .isNotEmpty() && binding.editTextPass1.text.toString().isNotEmpty()
             ) {
-                var bol = false
                 var email = binding.editTextEmail1.text.toString()
                 var pass = binding.editTextPass1.text.toString()
                 GlobalScope.launch(Dispatchers.Main) {
+                    var bol = true
                     db.collection("users")
                         .document(email).get()
                         .addOnSuccessListener {
@@ -69,7 +69,7 @@ class ThirdFragment : Fragment() {
                                 bol = true
                             }
                         }
-                    delay(3000L)
+                    delay(1000L)
                     if (bol) {
                         binding.editTextEmail1.setText("")
                         binding.editTextPass1.setText("")

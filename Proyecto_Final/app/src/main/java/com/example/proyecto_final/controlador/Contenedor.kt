@@ -1,6 +1,7 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,18 +10,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.BBDD
+import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@OptIn(DelicateCoroutinesApi::class)
 class Contenedor : Fragment() {
 
     private var _binding: ContendorBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
     var cantidades = mutableListOf<Int>()
@@ -36,24 +42,38 @@ class Contenedor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).datosView.borrar_lista_pedido()
-        activity?.title = "Hacer Pedido"
-        miRecyclerView = binding.frag2RecyclerView
-        miRecyclerView.layoutManager = LinearLayoutManager(activity)
-        miRecyclerView.adapter = Adaptador(
-            (activity as MainActivity).datosView.objetos,
-            this,
-            (activity as MainActivity).datosView
-        )
-
-        binding.butcompra.setOnClickListener {
-            BBDD().hacer_pedido(
-                (activity as MainActivity).datosView.lista_pedido,
-                (activity as MainActivity).datosView.usuario.email
+        GlobalScope.launch(Dispatchers.Main) {
+            var objetos: MutableList<Objetos> = mutableListOf()
+            db.collection("objetos").get().addOnSuccessListener {
+                for (item in it.documents) {
+                    val objeto = Objetos(
+                        item.get("nombre") as String, item.getDouble("precio") as Double
+                    )
+                    objetos.add(objeto)
+                }
+            }
+            delay(1000L)
+            (activity as MainActivity).datosView.borrar_lista_pedido()
+            activity?.title = "Hacer Pedido"
+            miRecyclerView = binding.frag2RecyclerView
+            miRecyclerView.layoutManager = LinearLayoutManager(activity)
+            miRecyclerView.adapter = Adaptador(
+                objetos, (activity as MainActivity).datosView
             )
-            findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
-
+            binding.butcompra.setOnClickListener {
+                if ((activity as MainActivity).datosView.lista_pedido.isNotEmpty()) {
+                    BBDD().hacer_pedido(
+                        (activity as MainActivity).datosView.lista_pedido,
+                        (activity as MainActivity).datosView.usuario.email
+                    )
+                } else {
+                    Log.d("","No hay nada en el carrito, redirigiendo")
+                    findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
+                }
+            }
         }
+
+
     }
 
     override fun onDestroyView() {

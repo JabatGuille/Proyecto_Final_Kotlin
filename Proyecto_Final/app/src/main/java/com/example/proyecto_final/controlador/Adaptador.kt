@@ -15,7 +15,6 @@ import com.example.proyecto_final.R
 
 class Adaptador(
     var datos: MutableList<Objetos>,
-    val fragmento: Fragment,
     var datosView: DatosView
 ) :
     RecyclerView.Adapter<Adaptador.ViewHolder>() {
@@ -24,6 +23,7 @@ class Adaptador(
         var cantidad: EditText = v.findViewById(R.id.editTextCantidad)
         var boton: Button = v.findViewById(R.id.btn_añadir)
         var posicion = -1
+
 
         init {
 

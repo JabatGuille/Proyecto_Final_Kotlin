@@ -25,22 +25,6 @@ class BBDD {
             }
     }
 
-    fun login_usuario(email: String, pass: String): Boolean {
-        var bol: Boolean = true
-        db.collection("users").document(email).get()
-            .addOnSuccessListener {
-                var bola = email == it.get("email") && pass == it.get(
-                    "email"
-                )
-                bol = bola
-            }
-        return bol
-    }
-
-    fun ver_pedidos() {
-
-    }
-
     fun hacer_pedido(listaPedido: HashMap<String, Pedido>, email: String) {
         var data = LocalDateTime.now().toString()
         var hasmap = hashMapOf("fecha" to data)
@@ -54,18 +38,5 @@ class BBDD {
                 db.collection("pedidos").document(email + data).set(hasmap)
             }
 
-
-    }
-
-
-    fun mostrar_objetos(datosView: DatosView) {
-        db.collection("objetos").get().addOnSuccessListener {
-            for (item in it.documents) {
-                val objeto = Objetos(
-                    item.get("nombre") as String, item.getDouble("precio") as Double
-                )
-                datosView.objetos.add(objeto)
-            }
-        }
     }
 }
