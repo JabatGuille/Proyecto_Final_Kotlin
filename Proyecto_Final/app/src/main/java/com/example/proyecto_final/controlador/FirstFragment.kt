@@ -10,11 +10,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.FragmentFirstBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+@OptIn(DelicateCoroutinesApi::class)
 class FirstFragment : Fragment() {
+    private val db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -52,20 +56,36 @@ class FirstFragment : Fragment() {
                             if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.editTextEmail.text.toString())
                                     .matches()
                             ) {
-                                if (BBDD().guardar_usuario(
-                                        binding.editTextEmail.text.toString(),
-                                        binding.editTextPass.text.toString()
-                                    )
-                                ) {
-                                    print("Email ya existe")
-                                    binding.editTextEmail.setText("")
-                                } else {
-                                    print("Usuario creado")
-                                    findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                var bol = false
+                                var email = binding.editTextEmail.text.toString()
+                                var pass = binding.editTextPass.text.toString()
+                                GlobalScope.launch(Dispatchers.Main) {
+                                    db.collection("users")
+                                        .document(email).get()
+                                        .addOnSuccessListener {
+                                            if (it.get("email") != null) {
+                                                var asda = it.get("email")
+                                                if (asda == email) {
+                                                    bol = true
+                                                }
+                                            } else {
+                                                bol = false
+                                            }
+                                        }
+delay(3000L)
+                                    if (bol) {
+                                        binding.editTextEmail.setText("")
+                                        Log.d("", "Email ya existe")
+                                    } else {
+                                        print("Usuario creado")
+                                        BBDD().guardar_usuario(email, pass)
+                                        findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                    }
                                 }
+
                             } else {
                                 print("Email no valido")
-                                Log.d("","Email no valido")
+                                Log.d("", "Email no valido")
                             }
                         } else {
                             binding.editTextPass.setText("")

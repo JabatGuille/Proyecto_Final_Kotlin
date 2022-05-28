@@ -11,28 +11,18 @@ class BBDD {
 
     private val db = FirebaseFirestore.getInstance()
 
-    fun guardar_usuario(email: String, pass: String): Boolean {
-        var bol = false
-
+    fun guardar_usuario(email: String, pass: String) {
         db.collection("users").document(email).get()
             .addOnSuccessListener {
-                if (email == it.get("email") && pass == it.get("password")
-                ) {
-                    bol = true
-                } else {
-                    db.collection("users")
-                        .document(email)
-                        .set(
-                            hashMapOf(
-                                "email" to email,
-                                "password" to pass
-                            )
+                db.collection("users")
+                    .document(email)
+                    .set(
+                        hashMapOf(
+                            "email" to email,
+                            "password" to pass
                         )
-                    bol = false
-                }
-
+                    )
             }
-        return bol
     }
 
     fun login_usuario(email: String, pass: String): Boolean {
