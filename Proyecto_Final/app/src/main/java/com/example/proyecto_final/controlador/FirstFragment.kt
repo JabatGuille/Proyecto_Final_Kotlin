@@ -72,7 +72,7 @@ class FirstFragment : Fragment() {
                                                 bol = false
                                             }
                                         }
-delay(3000L)
+                                    delay(3000L)
                                     if (bol) {
                                         binding.editTextEmail.setText("")
                                         Log.d("", "Email ya existe")
@@ -82,7 +82,6 @@ delay(3000L)
                                         findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                                     }
                                 }
-
                             } else {
                                 print("Email no valido")
                                 Log.d("", "Email no valido")
