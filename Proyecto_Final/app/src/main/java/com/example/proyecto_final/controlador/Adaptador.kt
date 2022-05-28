@@ -22,13 +22,13 @@ class Adaptador(
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var nombre: TextView = v.findViewById(R.id.textObjeto)
         var cantidad: EditText = v.findViewById(R.id.editTextCantidad)
+        var boton: Button = v.findViewById(R.id.btn_añadir)
         var posicion = -1
 
         init {
 
-            cantidad.seton { view, b ->
+            boton.setOnClickListener {
                 if (cantidad.text.toString() != "") {
-                    if (cantidad.text.toString().toInt() > 0)
                         datosView.añadir_cantidad(
                             datos[posicion].nombre,
                             datos[posicion].precio,

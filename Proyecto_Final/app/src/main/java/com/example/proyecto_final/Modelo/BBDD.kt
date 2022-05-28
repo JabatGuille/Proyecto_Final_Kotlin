@@ -51,17 +51,17 @@ class BBDD {
 
     }
 
-    fun hacer_pedido(listaPedido: MutableList<Pedido>, email: String) {
+    fun hacer_pedido(listaPedido: HashMap<String, Pedido>, email: String) {
         var data = LocalDateTime.now().toString()
         var hasmap = hashMapOf("fecha" to data)
-        listaPedido.forEach{
-            hasmap.put(it.nombre, it.cantidad.toString())
+        listaPedido.values.forEach {
+            if (it.cantidad > 0) {
+                hasmap.put(it.nombre, it.cantidad.toString())
+            }
         }
-        hasmap.put(listaPedido[listaPedido.size-1].nombre, listaPedido[listaPedido.size-1].cantidad.toString())
         db.collection("users").document(email).get()
             .addOnSuccessListener {
                 db.collection("pedidos").document(email + data).set(hasmap)
-
             }
 
 

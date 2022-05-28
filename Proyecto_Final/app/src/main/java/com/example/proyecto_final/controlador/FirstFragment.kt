@@ -1,6 +1,7 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,16 +49,23 @@ class FirstFragment : Fragment() {
                 if (binding.editTextPass.text.toString().isNotEmpty()) {
                     if (binding.editTextPass2.text.toString().isNotEmpty()) {
                         if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
-                            if (BBDD().guardar_usuario(
-                                    binding.editTextEmail.text.toString(),
-                                    binding.editTextPass.text.toString()
-                                )
+                            if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.editTextEmail.text.toString())
+                                    .matches()
                             ) {
-                                print("Email ya existe")
-                                binding.editTextEmail.setText("")
+                                if (BBDD().guardar_usuario(
+                                        binding.editTextEmail.text.toString(),
+                                        binding.editTextPass.text.toString()
+                                    )
+                                ) {
+                                    print("Email ya existe")
+                                    binding.editTextEmail.setText("")
+                                } else {
+                                    print("Usuario creado")
+                                    findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                }
                             } else {
-                                print("Usuario creado")
-                                findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                print("Email no valido")
+                                Log.d("","Email no valido")
                             }
                         } else {
                             binding.editTextPass.setText("")

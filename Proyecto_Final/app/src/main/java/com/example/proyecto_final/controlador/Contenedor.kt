@@ -36,6 +36,7 @@ class Contenedor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).datosView.borrar_lista_pedido()
         activity?.title = "Hacer Pedido"
         miRecyclerView = binding.frag2RecyclerView
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -46,7 +47,10 @@ class Contenedor : Fragment() {
         )
 
         binding.butcompra.setOnClickListener {
-            BBDD().hacer_pedido((activity as MainActivity).datosView.lista_pedido,(activity as MainActivity).datosView.usuario.email)
+            BBDD().hacer_pedido(
+                (activity as MainActivity).datosView.lista_pedido,
+                (activity as MainActivity).datosView.usuario.email
+            )
             findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
 
         }
