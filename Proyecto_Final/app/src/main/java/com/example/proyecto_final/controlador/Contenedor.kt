@@ -29,7 +29,6 @@ class Contenedor : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
-    var cantidades = mutableListOf<Int>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +41,7 @@ class Contenedor : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
             var objetos: MutableList<Objetos> = mutableListOf()
             db.collection("objetos").get().addOnSuccessListener {
@@ -55,7 +55,6 @@ class Contenedor : Fragment() {
             }
             delay(1000L)
             (activity as MainActivity).datosView.borrar_lista_pedido()
-            activity?.title = "Hacer Pedido"
             miRecyclerView = binding.frag2RecyclerView
             miRecyclerView.layoutManager = LinearLayoutManager(activity)
             miRecyclerView.adapter = Adaptador(
@@ -74,8 +73,6 @@ class Contenedor : Fragment() {
                 }
             }
         }
-
-
     }
 
     override fun onDestroyView() {

@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/recyclerview_ver_pedidos"
         android:name="com.example.proyecto_final.controlador.Contenedor_ver_pedidos"
-        android:label="recycler_view_ver_pedido"
+        android:label="recyclerview_ver_pedido"
         tools:layout="@layout/recyclerview_ver_pedidos" >
         <action
             android:id="@+id/action_recyclerview_ver_pedidos_to_SecondFragment"
