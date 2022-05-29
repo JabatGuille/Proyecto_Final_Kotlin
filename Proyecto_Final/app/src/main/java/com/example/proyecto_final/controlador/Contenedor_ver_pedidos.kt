@@ -52,6 +52,9 @@ class Contenedor_ver_pedidos : Fragment() {
                     if (item.get("email")
                             .toString() == (activity as MainActivity).datosView.usuario.email
                     ) {
+                        values.clear()
+                        keys.clear()
+                        objetos.clear()
                         var datos_BBDD = item.getData()
                         if (datos_BBDD != null) {
                             for (key in datos_BBDD.keys) {
@@ -76,7 +79,8 @@ class Contenedor_ver_pedidos : Fragment() {
                     }
                 }
             }
-            delay(1000L)
+            delay(2000L)
+            (activity as MainActivity).datosView.lista_pedidos_usuario = pedidos
             miRecyclerView = binding.frag3RecyclerView
             miRecyclerView.layoutManager = LinearLayoutManager(activity)
             miRecyclerView.adapter = Adatador_ver_pedidos(

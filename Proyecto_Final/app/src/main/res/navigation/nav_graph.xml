@@ -57,6 +57,18 @@
         <action
             android:id="@+id/action_recyclerview_ver_pedidos_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_recyclerview_ver_pedidos_to_recyclerview_pedido"
+            app:destination="@id/recyclerview_pedido" />
+    </fragment>
+    <fragment
+        android:id="@+id/recyclerview_pedido"
+        android:name="com.example.proyecto_final.controlador.Contenedor_pedido"
+        android:label="recyclerview_ver_pedido"
+        tools:layout="@layout/recyclerview_pedido" >
+        <action
+            android:id="@+id/action_recyclerview_pedido_to_recyclerview_ver_pedidos"
+            app:destination="@id/recyclerview_ver_pedidos" />
     </fragment>
 
 </navigation>

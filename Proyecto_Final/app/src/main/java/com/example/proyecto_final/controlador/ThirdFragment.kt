@@ -69,13 +69,15 @@ class ThirdFragment : Fragment() {
                                 bol = true
                             }
                         }
-                    delay(1000L)
+                    delay(2000L)
                     if (bol) {
                         binding.editTextEmail1.setText("")
                         binding.editTextPass1.setText("")
                         Log.d("", "Email o contraseña incorrectos")
                     } else {
                         (activity as MainActivity).datosView.guardar_usuario(email)
+                        binding.editTextPass1.setText("")
+                        binding.editTextEmail1.setText("")
                         findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
                     }
                 }

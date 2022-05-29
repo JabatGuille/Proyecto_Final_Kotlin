@@ -53,7 +53,7 @@ class Contenedor : Fragment() {
                     objetos.add(objeto)
                 }
             }
-            delay(1000L)
+            delay(2000L)
             (activity as MainActivity).datosView.borrar_lista_pedido()
             miRecyclerView = binding.frag2RecyclerView
             miRecyclerView.layoutManager = LinearLayoutManager(activity)
