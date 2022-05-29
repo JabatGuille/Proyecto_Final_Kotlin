@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -40,6 +41,12 @@ class ThirdFragment : Fragment() {
 
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.action_ajustes)?.isVisible = false
+        menu.findItem(R.id.action_retorno)?.isVisible = false
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -74,7 +81,11 @@ class ThirdFragment : Fragment() {
                     if (bol) {
                         binding.editTextEmail1.setText("")
                         binding.editTextPass1.setText("")
-                        Toast.makeText(activity,"Email o contraseña incorrectos",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            activity,
+                            "Email o contraseña incorrectos",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d("", "Email o contraseña incorrectos")
                     } else {
                         (activity as MainActivity).datosView.guardar_usuario(email)
@@ -84,7 +95,7 @@ class ThirdFragment : Fragment() {
                     }
                 }
             } else {
-                Toast.makeText(activity,"Falta email o contraseña",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Falta email o contraseña", Toast.LENGTH_SHORT).show()
             }
         }
     }

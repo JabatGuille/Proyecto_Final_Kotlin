@@ -21,18 +21,18 @@ class Adaptador(
         var cantidad: EditText = v.findViewById(R.id.editTextCantidad)
         var boton: Button = v.findViewById(R.id.btn_añadir)
         var posicion = -1
-var precio:Double = 0.00
+        var precio: Double = 0.00
 
         init {
 
             boton.setOnClickListener {
                 if (cantidad.text.toString() != "") {
-                        datosView.añadir_cantidad(
-                            datos[posicion].nombre,
-                            cantidad.text.toString().toInt(),
-                            precio
+                    datosView.añadir_cantidad(
+                        datos[posicion].nombre,
+                        cantidad.text.toString().toInt(),
+                        precio
 
-                        )
+                    )
                 }
             }
         }
@@ -50,6 +50,7 @@ var precio:Double = 0.00
         holder.nombre.setText(datos[position].nombre + " " + datos[position].precio.toString() + "€")
         holder.posicion = position
         holder.precio = datos[position].precio.toDouble()
+
     }
 
     override fun getItemCount(): Int {

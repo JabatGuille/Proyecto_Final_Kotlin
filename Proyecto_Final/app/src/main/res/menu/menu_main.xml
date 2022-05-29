@@ -4,10 +4,10 @@
     tools:context="com.example.proyecto_final.controlador.MainActivity">
 
     <item
-        android:id="@+id/action_guarda"
-        android:icon="@drawable/ic_save_foreground"
+        android:id="@+id/action_ajustes"
+        android:icon="@drawable/ic_settings_foreground"
         android:orderInCategory="100"
-        android:title="Guardar"
+        android:title="Ajustes"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_retorno"

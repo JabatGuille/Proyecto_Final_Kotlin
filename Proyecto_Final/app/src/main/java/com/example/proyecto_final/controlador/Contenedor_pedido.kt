@@ -3,11 +3,13 @@ package com.example.proyecto_final.controlador
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Pedidos
+import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContenedorPedidoBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -30,9 +32,9 @@ class Contenedor_pedido : Fragment() {
         _binding = ContenedorPedidoBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         val pedido: Pedidos = (activity as MainActivity).datosView.lista_pedidos_usuario.get(arguments?.getInt("id") ?: -1)
         activity?.title = "Ver Pedido"
         binding.textoTotal.setText("Total: "+pedido.total)

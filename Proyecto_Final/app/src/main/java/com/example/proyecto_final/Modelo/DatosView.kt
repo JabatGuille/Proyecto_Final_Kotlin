@@ -6,6 +6,7 @@ class DatosView : ViewModel() {
     var lista_pedido = HashMap<String, Pedido>()
     lateinit var usuario: Usuarios
     var lista_pedidos_usuario: MutableList<Pedidos> = mutableListOf()
+
     fun añadir_cantidad(nombre: String, cantidad: Int, precio: Double) {
         lista_pedido.put(nombre, Pedido(nombre, cantidad, precio))
     }

@@ -3,6 +3,7 @@ package com.example.proyecto_final.controlador
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.Modelo.Pedidos
+import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorVerPedidoBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
@@ -39,6 +41,7 @@ class Contenedor_ver_pedidos : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         activity?.title = "Ver pedidos"
         var framgment = this
         GlobalScope.launch(Dispatchers.Main) {
@@ -88,8 +91,9 @@ class Contenedor_ver_pedidos : Fragment() {
                 miRecyclerView.adapter = Adatador_ver_pedidos(
                     pedidos, framgment
                 )
-            }else {
-                Toast.makeText(activity,"No existen pedidos que mostrar", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(activity, "No existen pedidos que mostrar", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

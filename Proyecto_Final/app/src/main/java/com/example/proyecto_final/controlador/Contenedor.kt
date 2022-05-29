@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -40,8 +41,14 @@ class Contenedor : Fragment() {
 
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.action_ajustes)?.isVisible = false
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
             var objetos: MutableList<Objetos> = mutableListOf()
@@ -62,18 +69,21 @@ class Contenedor : Fragment() {
                 objetos, (activity as MainActivity).datosView
             )
             binding.butcompra.setOnClickListener {
-                if ((activity as MainActivity).datosView.lista_pedido.isNotEmpty()) {
+                if ((activity as MainActivity).datosView.lista_pedido.size > 0) {
                     BBDD().hacer_pedido(
                         (activity as MainActivity).datosView.lista_pedido,
                         (activity as MainActivity).datosView.usuario.email
                     )
-                    Toast.makeText(activity,"Compra realizada",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Compra realizada", Toast.LENGTH_SHORT).show()
 
                     findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
-                } else {
-                    Toast.makeText(activity,"Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
                 }
+
+            }
+            binding.butretroceder.setOnClickListener {
+                Toast.makeText(activity, "Cancelando compra", Toast.LENGTH_SHORT)
+                    .show()
+                findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
             }
         }
     }
