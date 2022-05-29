@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import com.example.proyecto_final.Modelo.DatosView
-import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ActivityMainBinding
 
@@ -18,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     val datosView: DatosView by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +42,12 @@ class MainActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        when(item.itemId){
+            R.id.action_salir ->{
+                finish()
+            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

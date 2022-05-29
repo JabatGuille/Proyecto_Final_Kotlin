@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Objetos
@@ -81,13 +82,18 @@ class Contenedor_ver_pedidos : Fragment() {
             }
             delay(2000L)
             (activity as MainActivity).datosView.lista_pedidos_usuario = pedidos
-            miRecyclerView = binding.frag3RecyclerView
-            miRecyclerView.layoutManager = LinearLayoutManager(activity)
-            miRecyclerView.adapter = Adatador_ver_pedidos(
-                pedidos, framgment
-            )
+            if (pedidos.size > 0) {
+                miRecyclerView = binding.frag3RecyclerView
+                miRecyclerView.layoutManager = LinearLayoutManager(activity)
+                miRecyclerView.adapter = Adatador_ver_pedidos(
+                    pedidos, framgment
+                )
+            }else {
+                Toast.makeText(activity,"No existen pedidos que mostrar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

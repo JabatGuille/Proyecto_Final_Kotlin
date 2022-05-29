@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,9 +67,11 @@ class Contenedor : Fragment() {
                         (activity as MainActivity).datosView.lista_pedido,
                         (activity as MainActivity).datosView.usuario.email
                     )
+                    Toast.makeText(activity,"Compra realizada",Toast.LENGTH_SHORT).show()
+
                     findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
                 } else {
-                    Log.d("","No hay nada en el carrito, redirigiendo")
+                    Toast.makeText(activity,"Email o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
                 }
             }

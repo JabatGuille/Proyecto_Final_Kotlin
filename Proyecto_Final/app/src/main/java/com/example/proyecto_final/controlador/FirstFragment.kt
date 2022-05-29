@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
@@ -75,31 +76,31 @@ class FirstFragment : Fragment() {
                                     delay(2000L)
                                     if (bol) {
                                         binding.editTextEmail.setText("")
-                                        Log.d("", "Email ya existe")
+                                        Toast.makeText(activity,"Email ya existe",
+                                            Toast.LENGTH_SHORT).show()
                                     } else {
-                                        print("Usuario creado")
+                                        Toast.makeText(activity,"Usuario creado",Toast.LENGTH_SHORT).show()
                                         BBDD().guardar_usuario(email, pass)
                                         findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                                     }
                                 }
                             } else {
-                                print("Email no valido")
-                                Log.d("", "Email no valido")
+                                Toast.makeText(activity,"Email no valido",Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             binding.editTextPass.setText("")
                             binding.editTextPass2.setText("")
-                            print("Contraseñas no coinciden")
+                            Toast.makeText(activity,"Contraseñas no coinciden",Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        print("Falta repetir contraseña")
+                        Toast.makeText(activity,"Falta repetir contraseña",Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    println("Falta contraseña")
+                    Toast.makeText(activity,"Falta contraseña",Toast.LENGTH_SHORT).show()
                 }
 
             } else {
-                println("Falta email")
+                Toast.makeText(activity,"Falta email",Toast.LENGTH_SHORT).show()
             }
         }
     }

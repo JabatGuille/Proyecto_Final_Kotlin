@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
@@ -73,6 +74,7 @@ class ThirdFragment : Fragment() {
                     if (bol) {
                         binding.editTextEmail1.setText("")
                         binding.editTextPass1.setText("")
+                        Toast.makeText(activity,"Email o contraseña incorrectos",Toast.LENGTH_SHORT).show()
                         Log.d("", "Email o contraseña incorrectos")
                     } else {
                         (activity as MainActivity).datosView.guardar_usuario(email)
@@ -82,7 +84,7 @@ class ThirdFragment : Fragment() {
                     }
                 }
             } else {
-                print("Falta email o contraseña")
+                Toast.makeText(activity,"Falta email o contraseña",Toast.LENGTH_SHORT).show()
             }
         }
     }
