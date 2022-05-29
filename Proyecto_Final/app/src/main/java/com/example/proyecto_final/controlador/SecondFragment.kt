@@ -1,11 +1,9 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.FragmentSecondBinding
@@ -30,7 +28,17 @@ class SecondFragment : Fragment() {
         return binding.root
 
     }
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        when (item.itemId) {
+            R.id.action_ajustes->{
+                findNavController().navigate(R.id.action_SecondFragment_to_ajustes2)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)

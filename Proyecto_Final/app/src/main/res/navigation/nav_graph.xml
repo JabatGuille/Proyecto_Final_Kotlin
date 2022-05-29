@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_SecondFragment_to_recyclerview_ver_pedidos"
             app:destination="@id/recyclerview_ver_pedidos" />
+        <action
+            android:id="@+id/action_SecondFragment_to_ajustes2"
+            app:destination="@id/ajustes" />
     </fragment>
     <fragment
         android:id="@+id/thirdFragment"
@@ -70,5 +73,10 @@
             android:id="@+id/action_recyclerview_pedido_to_recyclerview_ver_pedidos"
             app:destination="@id/recyclerview_ver_pedidos" />
     </fragment>
+    <fragment
+        android:id="@+id/ajustes"
+        android:name="com.example.proyecto_final.controlador.Ajustes"
+        android:label="ajustes"
+        tools:layout="@layout/ajustes" />
 
 </navigation>

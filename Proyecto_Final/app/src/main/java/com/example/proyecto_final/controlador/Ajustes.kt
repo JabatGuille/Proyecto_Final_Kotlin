@@ -1,38 +1,36 @@
 package com.example.proyecto_final.controlador
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.proyecto_final.Modelo.Pedidos
+import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.R
-import com.example.proyecto_final.databinding.ContenedorPedidoBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.proyecto_final.databinding.AjustesBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class Contenedor_pedido : Fragment() {
+class Ajustes : Fragment() {
 
-    private var _binding: ContenedorPedidoBinding? = null
+    private var _binding: AjustesBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
-    lateinit var miRecyclerView: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ContenedorPedidoBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
+        _binding = AjustesBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.action_ajustes)?.isVisible = false
@@ -41,18 +39,16 @@ class Contenedor_pedido : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        activity?.title = "Ver Pedido"
-        val pedido: Pedidos = (activity as MainActivity).datosView.lista_pedidos_usuario.get(
-            arguments?.getInt("id") ?: -1
-        )
-        binding.textoTotal.setText("Total: " + pedido.total)
-        miRecyclerView = binding.fragment4
-        miRecyclerView.layoutManager = LinearLayoutManager(activity)
-        miRecyclerView.adapter = Adatador_pedido(
-            pedido.objetos
-        )
-    }
+        activity?.title = "Ajustes"
 
+        binding.botonCambiarContraseya.setOnClickListener {
+            binding.botonGuardarContraseya.visibility = View.VISIBLE
+            binding.textviewContraseya.visibility = View.VISIBLE
+            binding.textviewContraseya2.visibility = View.VISIBLE
+            binding.edittextContraseya.visibility = View.VISIBLE
+            binding.edittextRepitacontraseya.visibility = View.VISIBLE
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

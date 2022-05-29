@@ -38,6 +38,10 @@ class Contenedor_ver_pedidos : Fragment() {
         return binding.root
 
     }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.action_ajustes)?.isVisible = false
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

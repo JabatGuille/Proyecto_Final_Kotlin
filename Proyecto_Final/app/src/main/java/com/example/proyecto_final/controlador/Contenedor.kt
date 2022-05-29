@@ -44,6 +44,7 @@ class Contenedor : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.action_ajustes)?.isVisible = false
+        menu.findItem(R.id.action_retorno)?.isVisible = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
