@@ -3,14 +3,10 @@ package com.example.proyecto_final.controlador
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Objetos
-import com.example.proyecto_final.Modelo.Pedidos
 import com.example.proyecto_final.R
-import org.w3c.dom.Text
 
 
 class Adatador_pedido(var datos: MutableList<Objetos>, var precio: HashMap<String, String>) :

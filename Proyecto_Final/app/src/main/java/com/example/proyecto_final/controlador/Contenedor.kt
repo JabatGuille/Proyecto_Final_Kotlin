@@ -11,10 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.BBDD
-import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 
 /**
@@ -50,7 +48,7 @@ class Contenedor : Fragment() {
         setHasOptionsMenu(true)
         activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
-            var objetos = BBDD().sacar_objetos()
+            val objetos = BBDD().sacar_objetos()
             delay(2000L)
             (activity as MainActivity).datosView.borrar_lista_pedido()
             miRecyclerView = binding.frag2RecyclerView

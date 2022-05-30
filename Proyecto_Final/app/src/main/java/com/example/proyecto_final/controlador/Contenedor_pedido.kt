@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.Pedidos
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContenedorPedidoBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -22,7 +21,6 @@ class Contenedor_pedido : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
     override fun onCreateView(

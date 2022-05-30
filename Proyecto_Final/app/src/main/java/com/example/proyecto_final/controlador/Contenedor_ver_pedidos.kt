@@ -1,7 +1,6 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -11,11 +10,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_final.Modelo.BBDD
-import com.example.proyecto_final.Modelo.Objetos
-import com.example.proyecto_final.Modelo.Pedidos
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorVerPedidoBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 
 /**
@@ -49,11 +45,11 @@ class Contenedor_ver_pedidos : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity?.title = "Ver pedidos"
-        var framgment = this
+        val framgment = this
         GlobalScope.launch(Dispatchers.Main) {
             (activity as MainActivity).datosView.lista_pedidos_usuario =
                 BBDD().sacar_pedidos((activity as MainActivity).datosView.usuario.email)
-            var objetos = BBDD().sacar_precio()
+            val objetos = BBDD().sacar_precio()
             delay(2000L)
             if ((activity as MainActivity).datosView.lista_pedidos_usuario.size > 0) {
                 (activity as MainActivity).datosView.precio = objetos
