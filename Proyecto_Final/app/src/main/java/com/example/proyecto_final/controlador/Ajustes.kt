@@ -56,6 +56,13 @@ class Ajustes : Fragment() {
                         (activity as MainActivity).datosView.usuario.email,
                         (activity as MainActivity).datosView.ecryptar_contraseya(binding.edittextContraseya.text.toString())
                     )
+                    binding.edittextContraseya.setText("")
+                    binding.edittextRepitacontraseya.setText("")
+                    Toast.makeText(
+                        activity,
+                        "Contraseña guardada",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     binding.edittextContraseya.setText("")
                     binding.edittextRepitacontraseya.setText("")
