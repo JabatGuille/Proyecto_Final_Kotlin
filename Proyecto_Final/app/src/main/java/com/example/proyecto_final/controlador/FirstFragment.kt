@@ -45,6 +45,7 @@ class FirstFragment : Fragment() {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.action_ajustes)?.isVisible = false
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
@@ -57,54 +58,79 @@ class FirstFragment : Fragment() {
             if (binding.editTextEmail.text.toString().isNotEmpty()) {
                 if (binding.editTextPass.text.toString().isNotEmpty()) {
                     if (binding.editTextPass2.text.toString().isNotEmpty()) {
-                        if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
-                            if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.editTextEmail.text.toString())
-                                    .matches()
-                            ) {
-                                var bol = false
-                                var email = binding.editTextEmail.text.toString()
-                                var pass = binding.editTextPass.text.toString()
-                                GlobalScope.launch(Dispatchers.Main) {
-                                    db.collection("users")
-                                        .document(email).get()
-                                        .addOnSuccessListener {
-                                            if (it.get("email") != null) {
-                                                var asda = it.get("email")
-                                                if (asda == email) {
-                                                    bol = true
+                        if (android.util.Patterns.EMAIL_ADDRESS.matcher(binding.editTextEmail.text.toString())
+                                .matches()
+                        ) {
+                            if (binding.editTextPass.text.toString().length >= 8) {
+                                if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
+                                    var bol = false
+                                    val email = binding.editTextEmail.text.toString()
+                                    val pass = binding.editTextPass.text.toString()
+                                    val pashash =
+                                        (activity as MainActivity).datosView.ecryptar_contraseya(
+                                            pass
+                                        )
+                                    GlobalScope.launch(Dispatchers.Main) {
+                                        db.collection("users")
+                                            .document(email).get()
+                                            .addOnSuccessListener {
+                                                if (it.get("email") != null) {
+                                                    val asda = it.get("email")
+                                                    if (asda == email) {
+                                                        bol = true
+                                                    }
+                                                } else {
+                                                    bol = false
                                                 }
-                                            } else {
-                                                bol = false
                                             }
+                                        delay(2000L)
+                                        if (bol) {
+                                            binding.editTextEmail.setText("")
+                                            Toast.makeText(
+                                                activity, "Email ya existe",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        } else {
+                                            Toast.makeText(
+                                                activity,
+                                                "Usuario creado",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            BBDD().guardar_usuario(email, pashash)
+                                            findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                                         }
-                                    delay(2000L)
-                                    if (bol) {
-                                        binding.editTextEmail.setText("")
-                                        Toast.makeText(activity,"Email ya existe",
-                                            Toast.LENGTH_SHORT).show()
-                                    } else {
-                                        Toast.makeText(activity,"Usuario creado",Toast.LENGTH_SHORT).show()
-                                        BBDD().guardar_usuario(email, pass)
-                                        findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                                     }
+                                } else {
+                                    binding.editTextPass.setText("")
+                                    binding.editTextPass2.setText("")
+                                    Toast.makeText(
+                                        activity,
+                                        "Contraseñas no coinciden",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             } else {
-                                Toast.makeText(activity,"Email no valido",Toast.LENGTH_SHORT).show()
+                                binding.editTextPass.setText("")
+                                binding.editTextPass2.setText("")
+                                Toast.makeText(
+                                    activity,
+                                    "La contraseña corta debe tener minimo 8 de longitud",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } else {
-                            binding.editTextPass.setText("")
-                            binding.editTextPass2.setText("")
-                            Toast.makeText(activity,"Contraseñas no coinciden",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, "Email no valido", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(activity,"Falta repetir contraseña",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Falta repetir contraseña", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 } else {
-                    Toast.makeText(activity,"Falta contraseña",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Falta contraseña", Toast.LENGTH_SHORT).show()
                 }
 
             } else {
-                Toast.makeText(activity,"Falta email",Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Falta email", Toast.LENGTH_SHORT).show()
             }
         }
     }

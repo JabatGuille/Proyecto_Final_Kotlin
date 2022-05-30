@@ -1,6 +1,7 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -38,6 +39,7 @@ class Contenedor_ver_pedidos : Fragment() {
         return binding.root
 
     }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.action_ajustes)?.isVisible = false
@@ -50,7 +52,7 @@ class Contenedor_ver_pedidos : Fragment() {
         var framgment = this
         GlobalScope.launch(Dispatchers.Main) {
             var pedidos: MutableList<Pedidos> = mutableListOf()
-            var objetos: MutableList<Objetos> = mutableListOf()
+            var objetos_comprados: MutableList<Objetos> = mutableListOf()
             var keys: MutableList<String> = mutableListOf()
             var values: MutableList<String> = mutableListOf()
             var total = ""
@@ -62,8 +64,8 @@ class Contenedor_ver_pedidos : Fragment() {
                     ) {
                         values.clear()
                         keys.clear()
-                        objetos.clear()
-                        var datos_BBDD = item.getData()
+                        objetos_comprados.clear()
+                        val datos_BBDD = item.getData()
                         if (datos_BBDD != null) {
                             for (key in datos_BBDD.keys) {
                                 keys.add(key.toString())
@@ -73,7 +75,7 @@ class Contenedor_ver_pedidos : Fragment() {
                             }
                             for (i in 0 until keys.size) {
                                 if (keys.get(i) != "total" && keys.get(i) != "fecha" && keys.get(i) != "email") {
-                                    objetos.add(Objetos(keys.get(i), values.get(i)))
+                                    objetos_comprados.add(Objetos(keys.get(i), values.get(i)))
                                 } else {
                                     if (keys.get(i) == "total") {
                                         total = values.get(i)
@@ -82,7 +84,30 @@ class Contenedor_ver_pedidos : Fragment() {
                                     }
                                 }
                             }
-                            pedidos.add(Pedidos(fecha, objetos, total))
+                            pedidos.add(Pedidos(fecha, objetos_comprados, total))
+                        }
+                    }
+                }
+            }
+            var clave: MutableList<String> = mutableListOf()
+            var valor: MutableList<String> = mutableListOf()
+            var objetos: HashMap<String, String> = hashMapOf()
+            db.collection("objetos").get().addOnSuccessListener {
+                for (item in it.documents) {
+                    val datos_BBDD = item.getData()
+                    if (datos_BBDD != null) {
+                        var contador = 0
+                        for (value in datos_BBDD.values) {
+                            if (contador == 0) {
+                                contador++
+                                valor.add(value.toString())
+                            } else {
+                                contador = 0
+                                clave.add(value.toString())
+                            }
+                        }
+                        for (i in 0 until clave.size) {
+                            objetos.put(clave.get(i), valor.get(i))
                         }
                     }
                 }
@@ -90,6 +115,7 @@ class Contenedor_ver_pedidos : Fragment() {
             delay(2000L)
             (activity as MainActivity).datosView.lista_pedidos_usuario = pedidos
             if (pedidos.size > 0) {
+                (activity as MainActivity).datosView.precio = objetos
                 miRecyclerView = binding.frag3RecyclerView
                 miRecyclerView.layoutManager = LinearLayoutManager(activity)
                 miRecyclerView.adapter = Adatador_ver_pedidos(

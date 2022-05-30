@@ -21,13 +21,17 @@ class Adatador_ver_pedidos(var datos: MutableList<Pedidos>, val fragmento: Fragm
         var total = ""
         var fecha: TextView = v.findViewById(R.id.texto_fecha)
         var boton: Button = v.findViewById(R.id.boton_ver_pedido)
-lateinit var pedido:Pedidos
+        lateinit var pedido: Pedidos
         lateinit var objetos: MutableList<Objetos>
 
         init {
             boton.setOnClickListener {
-                val bundle = bundleOf("id" to this.posicion)
-                fragmento.findNavController().navigate(R.id.action_recyclerview_ver_pedidos_to_recyclerview_pedido,bundle)
+                val bundle = bundleOf(
+                    "id" to this.posicion,
+                    "precio" to objetos
+                )
+                fragmento.findNavController()
+                    .navigate(R.id.action_recyclerview_ver_pedidos_to_recyclerview_pedido, bundle)
             }
         }
     }

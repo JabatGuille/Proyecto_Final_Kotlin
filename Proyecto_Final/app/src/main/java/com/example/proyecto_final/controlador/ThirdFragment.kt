@@ -60,6 +60,7 @@ class ThirdFragment : Fragment() {
             ) {
                 var email = binding.editTextEmail1.text.toString()
                 var pass = binding.editTextPass1.text.toString()
+                var pashash = (activity as MainActivity).datosView.ecryptar_contraseya(pass)
                 GlobalScope.launch(Dispatchers.Main) {
                     var bol = true
                     db.collection("users")
@@ -69,7 +70,7 @@ class ThirdFragment : Fragment() {
                                 var asda = it.get("email")
                                 var pasdwa = it.get("password")
                                 if (asda == email) {
-                                    if (pasdwa == pass) {
+                                    if (pasdwa == pashash) {
                                         bol = false
                                     }
                                 }

@@ -35,8 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:fontFamily="casual"
+        android:hint="Repita Contraseña:"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:fontFamily="casual"
+        android:hint="Contraseña:"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,33 +65,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.666" />
-
-    <TextView
-        android:id="@+id/textview_contraseya"
-        android:layout_width="99dp"
-        android:layout_height="32dp"
-        android:text="Contraseña"
-        android:textAlignment="center"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
-
-    <TextView
-        android:id="@+id/textview_contraseya2"
-        android:layout_width="99dp"
-        android:layout_height="32dp"
-        android:text="Repita Contraseña"
-        android:textAlignment="center"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

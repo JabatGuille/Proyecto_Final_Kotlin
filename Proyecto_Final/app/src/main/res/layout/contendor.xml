@@ -8,9 +8,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/frag2_recyclerView"
-        android:layout_width="412dp"
-        android:layout_height="517dp"
+        android:layout_width="413dp"
+        android:layout_height="424dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,4 +39,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frag2_recyclerView"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="143dp"
+        android:layout_height="28dp"
+        android:text="Nombre | Precio"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.059"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
 </androidx.constraintlayout.widget.ConstraintLayout>

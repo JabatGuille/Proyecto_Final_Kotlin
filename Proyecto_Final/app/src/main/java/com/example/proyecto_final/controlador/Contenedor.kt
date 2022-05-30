@@ -1,7 +1,6 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -70,9 +69,9 @@ class Contenedor : Fragment() {
                 objetos, (activity as MainActivity).datosView
             )
             binding.butcompra.setOnClickListener {
-                if ((activity as MainActivity).datosView.lista_pedido.size > 0) {
+                if ((activity as MainActivity).datosView.lista_objetoComprado.size > 0) {
                     BBDD().hacer_pedido(
-                        (activity as MainActivity).datosView.lista_pedido,
+                        (activity as MainActivity).datosView.lista_objetoComprado,
                         (activity as MainActivity).datosView.usuario.email
                     )
                     Toast.makeText(activity, "Compra realizada", Toast.LENGTH_SHORT).show()

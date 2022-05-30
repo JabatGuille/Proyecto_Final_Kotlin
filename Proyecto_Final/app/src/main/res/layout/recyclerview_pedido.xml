@@ -10,6 +10,8 @@
         android:layout_width="149dp"
         android:layout_height="26dp"
         android:text="TextView"
+        android:fontFamily="casual"
+        android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +22,7 @@
 
     <TextView
         android:id="@+id/texto_objeto_cantidad"
-        android:layout_width="149dp"
+        android:layout_width="116dp"
         android:layout_height="26dp"
         android:text="TextView"
         android:textAlignment="center"
@@ -30,5 +32,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/texto_objeto_precio"
+        android:layout_width="116dp"
+        android:layout_height="26dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

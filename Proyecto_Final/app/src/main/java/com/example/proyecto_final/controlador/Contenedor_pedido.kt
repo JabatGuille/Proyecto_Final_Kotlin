@@ -49,7 +49,7 @@ class Contenedor_pedido : Fragment() {
         miRecyclerView = binding.fragment4
         miRecyclerView.layoutManager = LinearLayoutManager(activity)
         miRecyclerView.adapter = Adatador_pedido(
-            pedido.objetos
+            pedido.objetos,(activity as MainActivity).datosView.precio
         )
     }
 

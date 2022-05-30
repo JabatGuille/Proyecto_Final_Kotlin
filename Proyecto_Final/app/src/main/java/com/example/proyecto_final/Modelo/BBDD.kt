@@ -1,11 +1,9 @@
 package com.example.proyecto_final.Modelo
 
-import android.util.Log
-import com.example.proyecto_final.controlador.MainActivity
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BBDD {
 
@@ -25,14 +23,14 @@ class BBDD {
             }
     }
 
-    fun hacer_pedido(listaPedido: HashMap<String, Pedido>, email: String) {
+    fun hacer_pedido(listaObjetoComprado: HashMap<String, ObjetoComprado>, email: String) {
         var total = 0.0
-        for (objeto in listaPedido.values){
+        for (objeto in listaObjetoComprado.values){
             total += objeto.cantidad * objeto.precio
         }
-        var data = LocalDateTime.now().toString()
-        var hasmap = hashMapOf("fecha" to data)
-        listaPedido.values.forEach {
+        var data = LocalDate.now()
+        var hasmap = hashMapOf("fecha" to data.format(DateTimeFormatter.ofPattern("dd-MMM-yy")))
+        listaObjetoComprado.values.forEach {
             if (it.cantidad > 0) {
                 hasmap.put(it.nombre, it.cantidad.toString())
             }

@@ -13,11 +13,12 @@ import com.example.proyecto_final.R
 import org.w3c.dom.Text
 
 
-class Adatador_pedido(var datos: MutableList<Objetos>) :
+class Adatador_pedido(var datos: MutableList<Objetos>, var precio: HashMap<String, String>) :
     RecyclerView.Adapter<Adatador_pedido.ViewHolder>() {
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var ojeto: TextView = v.findViewById(R.id.texto_objeto_comprado)
         var cantidad: TextView = v.findViewById(R.id.texto_objeto_cantidad)
+        var precio_text: TextView = v.findViewById(R.id.texto_objeto_precio)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,6 +31,7 @@ class Adatador_pedido(var datos: MutableList<Objetos>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.ojeto.setText(datos.get(position).nombre)
         holder.cantidad.setText(datos.get(position).precio)
+        holder.precio_text.setText(precio.get(datos.get(position).nombre))
     }
 
     override fun getItemCount(): Int {

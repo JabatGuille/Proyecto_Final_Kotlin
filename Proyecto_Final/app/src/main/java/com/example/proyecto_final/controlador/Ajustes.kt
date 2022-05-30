@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.example.proyecto_final.Modelo.BBDD
+import com.example.proyecto_final.Modelo.DatosView
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.AjustesBinding
 
@@ -31,6 +34,7 @@ class Ajustes : Fragment() {
         return binding.root
 
     }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.action_ajustes)?.isVisible = false
@@ -43,10 +47,35 @@ class Ajustes : Fragment() {
 
         binding.botonCambiarContraseya.setOnClickListener {
             binding.botonGuardarContraseya.visibility = View.VISIBLE
-            binding.textviewContraseya.visibility = View.VISIBLE
-            binding.textviewContraseya2.visibility = View.VISIBLE
             binding.edittextContraseya.visibility = View.VISIBLE
             binding.edittextRepitacontraseya.visibility = View.VISIBLE
+        }
+
+        binding.botonGuardarContraseya.setOnClickListener {
+            if (binding.edittextContraseya.text.toString().length >= 8) {
+                if (binding.edittextContraseya.text.toString() == binding.edittextRepitacontraseya.text.toString()) {
+                    BBDD().guardar_usuario(
+                        (activity as MainActivity).datosView.usuario.email,
+                        (activity as MainActivity).datosView.ecryptar_contraseya(binding.edittextContraseya.text.toString())
+                    )
+                } else {
+                    binding.edittextContraseya.setText("")
+                    binding.edittextRepitacontraseya.setText("")
+                    Toast.makeText(
+                        activity,
+                        "Las contraseñas no coinciden",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                binding.edittextContraseya.setText("")
+                binding.edittextRepitacontraseya.setText("")
+                Toast.makeText(
+                    activity,
+                    "La contraseña corta debe tener minimo 8 de longitud",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

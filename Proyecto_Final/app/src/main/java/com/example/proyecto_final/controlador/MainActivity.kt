@@ -4,13 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.proyecto_final.Modelo.DatosView
-import com.example.proyecto_final.Modelo.Pedido
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ActivityMainBinding
 
