@@ -27,7 +27,7 @@ class BBDD {
         for (objeto in listaObjetoComprado.values) {
             total += objeto.cantidad * objeto.precio
         }
-         total= String.format("%-2f",total).toDouble()
+        total = String.format("%-2f", total).toDouble()
         val data = LocalDate.now()
         val hasmap = hashMapOf("fecha" to data.format(DateTimeFormatter.ofPattern("dd-MMM-yy")))
         listaObjetoComprado.values.forEach {
@@ -65,42 +65,35 @@ class BBDD {
 
     fun sacar_pedidos(email: String): MutableList<Pedidos> {
         val pedidos: MutableList<Pedidos> = mutableListOf()
-        val objetos_comprados: MutableList<Objetos> = mutableListOf()
-        val keys: MutableList<String> = mutableListOf()
-        val values: MutableList<String> = mutableListOf()
-        var total = ""
-        var fecha = ""
+
+        var contador = 0
         db.collection("pedidos").get().addOnSuccessListener {
             for (item in it.documents) {
                 if (item.get("email")
                         .toString() == email
                 ) {
-                    values.clear()
-                    keys.clear()
-                    objetos_comprados.clear()
+                    val objetos_comprados: MutableList<Objetos> = mutableListOf()
+                    var total = ""
+                    var fecha = ""
                     val datos_BBDD = item.getData()
                     if (datos_BBDD != null) {
-                        for (key in datos_BBDD.keys) {
-                            keys.add(key.toString())
-                        }
-                        for (value in datos_BBDD.values) {
-                            values.add(value.toString())
-                        }
-                        for (i in 0 until keys.size) {
-                            if (keys.get(i) != "total" && keys.get(i) != "fecha" && keys.get(i) != "email") {
-                                objetos_comprados.add(Objetos(keys.get(i), values.get(i)))
+                        for ((key, value) in datos_BBDD) {
+                            if (key != "total" && key != "fecha" && key != "email") {
+                                objetos_comprados.add(Objetos(key.toString(), value.toString()))
                             } else {
-                                if (keys.get(i) == "total") {
-                                    total = values.get(i)
-                                } else if (keys.get(i) == "fecha") {
-                                    fecha = values.get(i)
+                                if (key == "total") {
+                                    total = value.toString()
+                                } else if (key == "fecha") {
+                                    fecha = value.toString()
                                 }
                             }
                         }
-                        pedidos.add(Pedidos(fecha, objetos_comprados, total))
+                        pedidos.add(contador, Pedidos(fecha, objetos_comprados, total))
+                        contador++
                     }
                 }
             }
+            print("")
         }
         return pedidos
     }
