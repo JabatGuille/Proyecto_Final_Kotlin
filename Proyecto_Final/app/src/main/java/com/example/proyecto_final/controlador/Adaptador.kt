@@ -27,7 +27,7 @@ class Adaptador(
 
             boton.setOnClickListener {
                 if (cantidad.text.toString() != "") {
-                    datosView.añadir_cantidad(
+                    datosView.ayadir_cantidad(
                         datos[posicion].nombre,
                         cantidad.text.toString().toInt(),
                         precio
@@ -47,7 +47,8 @@ class Adaptador(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.nombre.setText(datos[position].nombre + " " + datos[position].precio.toString() + "€")
+        val nombre = datos[position].nombre + " " + datos[position].precio + "€"
+        holder.nombre.setText(nombre)
         holder.posicion = position
         holder.precio = datos[position].precio.toDouble()
 

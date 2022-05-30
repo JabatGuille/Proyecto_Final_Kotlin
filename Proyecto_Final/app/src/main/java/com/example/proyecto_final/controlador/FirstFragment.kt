@@ -1,7 +1,6 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -12,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.FragmentFirstBinding
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 
 /**
@@ -20,7 +18,6 @@ import kotlinx.coroutines.*
  */
 @OptIn(DelicateCoroutinesApi::class)
 class FirstFragment : Fragment() {
-    private val db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -63,7 +60,6 @@ class FirstFragment : Fragment() {
                         ) {
                             if (binding.editTextPass.text.toString().length >= 8) {
                                 if (binding.editTextPass.text.toString() == binding.editTextPass2.text.toString()) {
-                                    var bol = false
                                     val email = binding.editTextEmail.text.toString()
                                     val pass = binding.editTextPass.text.toString()
                                     val pashash =
@@ -71,34 +67,27 @@ class FirstFragment : Fragment() {
                                             pass
                                         )
                                     GlobalScope.launch(Dispatchers.Main) {
-                                        db.collection("users")
-                                            .document(email).get()
-                                            .addOnSuccessListener {
-                                                if (it.get("email") != null) {
-                                                    val asda = it.get("email")
-                                                    if (asda == email) {
-                                                        bol = true
-                                                    }
-                                                } else {
-                                                    bol = false
-                                                }
+                                        val usuarios = BBDD().comprobar_email(email)
+                                        delay(2000L)
+                                        try {
+                                            if (usuarios.size == 1) {
+                                                binding.editTextEmail.setText("")
+                                                Toast.makeText(
+                                                    activity, "Email ya existe",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            } else {
+                                                Toast.makeText(
+                                                    activity,
+                                                    "Usuario creado",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                BBDD().guardar_usuario(email, pashash)
+                                                findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
                                             }
-                                        delay(3000L)
-                                        if (bol) {
-                                            binding.editTextEmail.setText("")
-                                            Toast.makeText(
-                                                activity, "Email ya existe",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        } else {
-                                            Toast.makeText(
-                                                activity,
-                                                "Usuario creado",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            BBDD().guardar_usuario(email, pashash)
-                                            findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
+                                        } catch (e: Exception) {
                                         }
+
                                     }
                                 } else {
                                     binding.editTextPass.setText("")

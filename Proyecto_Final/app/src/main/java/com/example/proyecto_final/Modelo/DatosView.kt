@@ -11,7 +11,7 @@ class DatosView : ViewModel() {
     var precio: HashMap<String, String> = hashMapOf()
     var lista_pedidos_usuario: MutableList<Pedidos> = mutableListOf()
 
-    fun añadir_cantidad(nombre: String, cantidad: Int, precio: Double) {
+    fun ayadir_cantidad(nombre: String, cantidad: Int, precio: Double) {
         lista_objetoComprado.put(nombre, ObjetoComprado(nombre, cantidad, precio))
     }
 

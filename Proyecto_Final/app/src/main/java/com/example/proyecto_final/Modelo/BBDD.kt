@@ -1,9 +1,7 @@
 package com.example.proyecto_final.Modelo
 
-import com.example.proyecto_final.controlador.MainActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class BBDD {
@@ -29,8 +27,8 @@ class BBDD {
         for (objeto in listaObjetoComprado.values) {
             total += objeto.cantidad * objeto.precio
         }
-        var data = LocalDate.now()
-        var hasmap = hashMapOf("fecha" to data.format(DateTimeFormatter.ofPattern("dd-MMM-yy")))
+        val data = LocalDate.now()
+        val hasmap = hashMapOf("fecha" to data.format(DateTimeFormatter.ofPattern("dd-MMM-yy")))
         listaObjetoComprado.values.forEach {
             if (it.cantidad > 0) {
                 hasmap.put(it.nombre, it.cantidad.toString())
@@ -51,10 +49,10 @@ class BBDD {
     }
 
     fun sacar_objetos(): MutableList<Objetos> {
-        var objetos: MutableList<Objetos> = mutableListOf()
+        val objetos: MutableList<Objetos> = mutableListOf()
         db.collection("objetos").get().addOnSuccessListener {
             for (item in it.documents) {
-                var precio = item.getDouble("precio") as Double
+                val precio = item.getDouble("precio") as Double
                 val objeto = Objetos(
                     item.get("nombre") as String, precio.toString()
                 )
@@ -65,10 +63,10 @@ class BBDD {
     }
 
     fun sacar_pedidos(email: String): MutableList<Pedidos> {
-        var pedidos: MutableList<Pedidos> = mutableListOf()
-        var objetos_comprados: MutableList<Objetos> = mutableListOf()
-        var keys: MutableList<String> = mutableListOf()
-        var values: MutableList<String> = mutableListOf()
+        val pedidos: MutableList<Pedidos> = mutableListOf()
+        val objetos_comprados: MutableList<Objetos> = mutableListOf()
+        val keys: MutableList<String> = mutableListOf()
+        val values: MutableList<String> = mutableListOf()
         var total = ""
         var fecha = ""
         db.collection("pedidos").get().addOnSuccessListener {
@@ -107,9 +105,9 @@ class BBDD {
     }
 
     fun sacar_precio(): HashMap<String, String> {
-        var clave: MutableList<String> = mutableListOf()
-        var valor: MutableList<String> = mutableListOf()
-        var objetos: HashMap<String, String> = hashMapOf()
+        val clave: MutableList<String> = mutableListOf()
+        val valor: MutableList<String> = mutableListOf()
+        val objetos: HashMap<String, String> = hashMapOf()
         db.collection("objetos").get().addOnSuccessListener {
             for (item in it.documents) {
                 val datos_BBDD = item.getData()
@@ -134,18 +132,32 @@ class BBDD {
     }
 
     fun comprobar_usuario(email: String, pashash: String): MutableList<String> {
-        var usuarios: MutableList<String> = mutableListOf()
+        val usuarios: MutableList<String> = mutableListOf()
         db.collection("users").get().addOnSuccessListener {
             for (item in it.documents) {
 
-                var emailBBDD = item.get("email")
-                var passBBDD = item.get("password")
+                val emailBBDD = item.get("email")
+                val passBBDD = item.get("password")
                 if (emailBBDD == email) {
                     if (pashash == passBBDD) {
 
                         usuarios.add(item.get("email") as String)
                     }
                 }
+            }
+        }
+        return usuarios
+    }
+
+    fun comprobar_email(email: String): MutableList<String> {
+        val usuarios: MutableList<String> = mutableListOf()
+        db.collection("users").get().addOnSuccessListener {
+            for (item in it.documents) {
+                val emailBBDD = item.get("email")
+                if (emailBBDD == email) {
+                    usuarios.add(item.get("email") as String)
+                }
+
             }
         }
         return usuarios

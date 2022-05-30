@@ -13,6 +13,7 @@ import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.R
 import com.example.proyecto_final.databinding.ContendorVerPedidoBinding
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -24,6 +25,7 @@ class Contenedor_ver_pedidos : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+    var fragment = activity
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
     override fun onCreateView(
@@ -50,17 +52,21 @@ class Contenedor_ver_pedidos : Fragment() {
             (activity as MainActivity).datosView.lista_pedidos_usuario =
                 BBDD().sacar_pedidos((activity as MainActivity).datosView.usuario.email)
             val objetos = BBDD().sacar_precio()
-            delay(3000L)
-            if ((activity as MainActivity).datosView.lista_pedidos_usuario.size > 0) {
-                (activity as MainActivity).datosView.precio = objetos
-                miRecyclerView = binding.frag3RecyclerView
-                miRecyclerView.layoutManager = LinearLayoutManager(activity)
-                miRecyclerView.adapter = Adatador_ver_pedidos(
-                    (activity as MainActivity).datosView.lista_pedidos_usuario, framgment
-                )
-            } else {
-                Toast.makeText(activity, "No existen pedidos que mostrar", Toast.LENGTH_SHORT)
-                    .show()
+            delay(2000L)
+            try {
+                if ((activity as MainActivity).datosView.lista_pedidos_usuario.size > 0) {
+                    (activity as MainActivity).datosView.precio = objetos
+                    miRecyclerView = binding.frag3RecyclerView
+                    miRecyclerView.layoutManager = LinearLayoutManager(activity)
+                    miRecyclerView.adapter = Adatador_ver_pedidos(
+                        (activity as MainActivity).datosView.lista_pedidos_usuario, framgment
+                    )
+                } else {
+                    Toast.makeText(activity, "No existen pedidos que mostrar", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            } catch (e: Exception) {
+
             }
         }
     }

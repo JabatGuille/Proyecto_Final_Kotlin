@@ -1,7 +1,6 @@
 package com.example.proyecto_final.controlador
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -61,21 +60,24 @@ class ThirdFragment : Fragment() {
                 val pashash = (activity as MainActivity).datosView.ecryptar_contraseya(pass)
                 GlobalScope.launch(Dispatchers.Main) {
                     val usuarios = BBDD().comprobar_usuario(email, pashash)
-                    delay(3000L)
-                    Log.d("",usuarios.size.toString())
-                    if (usuarios.size == 1) {
-                        (activity as MainActivity).datosView.guardar_usuario(email)
-                        binding.editTextPass1.setText("")
-                        binding.editTextEmail1.setText("")
-                        findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
-                    } else {
-                        binding.editTextEmail1.setText("")
-                        binding.editTextPass1.setText("")
-                        Toast.makeText(
-                            activity,
-                            "Email o contraseña incorrectos",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    delay(2000L)
+                    try {
+                        if (usuarios.size == 1) {
+                            (activity as MainActivity).datosView.guardar_usuario(email)
+                            binding.editTextPass1.setText("")
+                            binding.editTextEmail1.setText("")
+                            findNavController().navigate(R.id.action_thirdFragment_to_SecondFragment2)
+                        } else {
+                            binding.editTextEmail1.setText("")
+                            binding.editTextPass1.setText("")
+                            Toast.makeText(
+                                activity,
+                                "Email o contraseña incorrectos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } catch (e: Exception) {
+
                     }
                 }
             } else {

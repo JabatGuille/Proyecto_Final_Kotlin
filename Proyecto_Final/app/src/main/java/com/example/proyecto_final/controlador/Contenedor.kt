@@ -49,30 +49,33 @@ class Contenedor : Fragment() {
         activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
             val objetos = BBDD().sacar_objetos()
-            delay(3000L)
-            (activity as MainActivity).datosView.borrar_lista_pedido()
-            miRecyclerView = binding.frag2RecyclerView
-            miRecyclerView.layoutManager = LinearLayoutManager(activity)
-            miRecyclerView.adapter = Adaptador(
-                objetos, (activity as MainActivity).datosView
-            )
-            binding.butcompra.setOnClickListener {
-                if ((activity as MainActivity).datosView.lista_objetoComprado.size > 0) {
-                    BBDD().hacer_pedido(
-                        (activity as MainActivity).datosView.lista_objetoComprado,
-                        (activity as MainActivity).datosView.usuario.email
-                    )
-                    Toast.makeText(activity, "Compra realizada", Toast.LENGTH_SHORT).show()
+            delay(2000L)
+            try {
+                (activity as MainActivity).datosView.borrar_lista_pedido()
+                miRecyclerView = binding.frag2RecyclerView
+                miRecyclerView.layoutManager = LinearLayoutManager(activity)
+                miRecyclerView.adapter = Adaptador(
+                    objetos, (activity as MainActivity).datosView
+                )
+                binding.butcompra.setOnClickListener {
+                    if ((activity as MainActivity).datosView.lista_objetoComprado.size > 0) {
+                        BBDD().hacer_pedido(
+                            (activity as MainActivity).datosView.lista_objetoComprado,
+                            (activity as MainActivity).datosView.usuario.email
+                        )
+                        Toast.makeText(activity, "Compra realizada", Toast.LENGTH_SHORT).show()
 
+                        findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
+                    }
+                }
+                binding.butretroceder.setOnClickListener {
+                    Toast.makeText(activity, "Cancelando compra", Toast.LENGTH_SHORT)
+                        .show()
                     findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
                 }
+            } catch (e: Exception) {
+            }
 
-            }
-            binding.butretroceder.setOnClickListener {
-                Toast.makeText(activity, "Cancelando compra", Toast.LENGTH_SHORT)
-                    .show()
-                findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
-            }
         }
     }
 
