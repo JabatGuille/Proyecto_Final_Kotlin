@@ -108,6 +108,7 @@ class FirstFragment : Fragment() {
                                 ).show()
                             }
                         } else {
+                            binding.editTextEmail.setText("")
                             Toast.makeText(activity, "Email no valido", Toast.LENGTH_SHORT).show()
                         }
                     } else {
