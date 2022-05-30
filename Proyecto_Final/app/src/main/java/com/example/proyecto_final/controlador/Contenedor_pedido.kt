@@ -43,6 +43,7 @@ class Contenedor_pedido : Fragment() {
         val pedido: Pedidos = (activity as MainActivity).datosView.lista_pedidos_usuario.get(
             arguments?.getInt("id") ?: -1
         )
+
         val total = "Total: " + pedido.total
         binding.textoTotal.setText(total)
         miRecyclerView = binding.fragment4

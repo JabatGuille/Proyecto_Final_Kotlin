@@ -27,6 +27,7 @@ class BBDD {
         for (objeto in listaObjetoComprado.values) {
             total += objeto.cantidad * objeto.precio
         }
+         total= String.format("%-2f",total).toDouble()
         val data = LocalDate.now()
         val hasmap = hashMapOf("fecha" to data.format(DateTimeFormatter.ofPattern("dd-MMM-yy")))
         listaObjetoComprado.values.forEach {

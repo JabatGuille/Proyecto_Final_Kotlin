@@ -42,7 +42,7 @@ class Ajustes : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         activity?.title = "Ajustes"
-
+        binding.textUsuario.setText((activity as MainActivity).datosView.usuario.email)
         binding.botonCambiarContraseya.setOnClickListener {
             binding.botonGuardarContraseya.visibility = View.VISIBLE
             binding.edittextContraseya.visibility = View.VISIBLE
