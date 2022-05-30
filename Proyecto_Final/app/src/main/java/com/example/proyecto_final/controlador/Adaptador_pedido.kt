@@ -12,7 +12,7 @@ import com.example.proyecto_final.R
 class Adatador_pedido(var datos: MutableList<Objetos>, var precio: HashMap<String, String>) :
     RecyclerView.Adapter<Adatador_pedido.ViewHolder>() {
     inner class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var ojeto: TextView = v.findViewById(R.id.texto_objeto_comprado)
+        var objeto: TextView = v.findViewById(R.id.texto_objeto_comprado)
         var cantidad: TextView = v.findViewById(R.id.texto_objeto_cantidad)
         var precio_text: TextView = v.findViewById(R.id.texto_objeto_precio)
     }
@@ -25,7 +25,7 @@ class Adatador_pedido(var datos: MutableList<Objetos>, var precio: HashMap<Strin
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.ojeto.setText(datos.get(position).nombre)
+        holder.objeto.setText(datos.get(position).nombre)
         holder.cantidad.setText(datos.get(position).precio)
         holder.precio_text.setText(precio.get(datos.get(position).nombre))
     }
