@@ -66,6 +66,9 @@ class Contenedor : Fragment() {
                         Toast.makeText(activity, "Compra realizada", Toast.LENGTH_SHORT).show()
 
                         findNavController().navigate(R.id.action_recyclerview_hacer_pedido_to_SecondFragment)
+                    }else{
+                        Toast.makeText(activity, "El carrito esta vacio, necesita tener contenido para realizar la compra", Toast.LENGTH_SHORT).show()
+
                     }
                 }
                 binding.butretroceder.setOnClickListener {
