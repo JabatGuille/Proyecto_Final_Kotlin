@@ -132,4 +132,22 @@ class BBDD {
         }
         return objetos
     }
+
+    fun comprobar_usuario(email: String, pashash: String): MutableList<String> {
+        var usuarios: MutableList<String> = mutableListOf()
+        db.collection("users").get().addOnSuccessListener {
+            for (item in it.documents) {
+
+                var emailBBDD = item.get("email")
+                var passBBDD = item.get("password")
+                if (emailBBDD == email) {
+                    if (pashash == passBBDD) {
+
+                        usuarios.add(item.get("email") as String)
+                    }
+                }
+            }
+        }
+        return usuarios
+    }
 }

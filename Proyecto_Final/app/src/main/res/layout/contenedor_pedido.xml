@@ -57,10 +57,11 @@
 
     <TextView
         android:id="@+id/texto_total"
-        android:layout_width="122dp"
-        android:layout_height="37dp"
+        android:layout_width="174dp"
+        android:layout_height="79dp"
         android:text="TextView"
         android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.944"

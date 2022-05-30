@@ -83,7 +83,7 @@ class FirstFragment : Fragment() {
                                                     bol = false
                                                 }
                                             }
-                                        delay(2000L)
+                                        delay(3000L)
                                         if (bol) {
                                             binding.editTextEmail.setText("")
                                             Toast.makeText(

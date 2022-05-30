@@ -50,7 +50,7 @@ class Contenedor_ver_pedidos : Fragment() {
             (activity as MainActivity).datosView.lista_pedidos_usuario =
                 BBDD().sacar_pedidos((activity as MainActivity).datosView.usuario.email)
             val objetos = BBDD().sacar_precio()
-            delay(2000L)
+            delay(3000L)
             if ((activity as MainActivity).datosView.lista_pedidos_usuario.size > 0) {
                 (activity as MainActivity).datosView.precio = objetos
                 miRecyclerView = binding.frag3RecyclerView

@@ -49,7 +49,7 @@ class Contenedor : Fragment() {
         activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
             val objetos = BBDD().sacar_objetos()
-            delay(2000L)
+            delay(3000L)
             (activity as MainActivity).datosView.borrar_lista_pedido()
             miRecyclerView = binding.frag2RecyclerView
             miRecyclerView.layoutManager = LinearLayoutManager(activity)
