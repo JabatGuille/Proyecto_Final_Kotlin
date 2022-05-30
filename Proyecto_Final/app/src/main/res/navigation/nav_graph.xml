@@ -77,6 +77,10 @@
         android:id="@+id/ajustes"
         android:name="com.example.proyecto_final.controlador.Ajustes"
         android:label="ajustes"
-        tools:layout="@layout/ajustes" />
+        tools:layout="@layout/ajustes" >
+        <action
+            android:id="@+id/action_ajustes_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
+    </fragment>
 
 </navigation>

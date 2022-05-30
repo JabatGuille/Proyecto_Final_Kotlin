@@ -77,6 +77,10 @@ class Ajustes : Fragment() {
                 ).show()
             }
         }
+        binding.btnBorrarUsuario.setOnClickListener {
+            BBDD().borrar_usuario((activity as MainActivity).datosView.usuario.email)
+            findNavController().navigate(R.id.action_ajustes_to_thirdFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.proyecto_final.Modelo.BBDD
 import com.example.proyecto_final.Modelo.Objetos
 import com.example.proyecto_final.Modelo.Pedidos
 import com.example.proyecto_final.R
@@ -27,7 +28,6 @@ class Contenedor_ver_pedidos : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
     override fun onCreateView(
@@ -51,75 +51,16 @@ class Contenedor_ver_pedidos : Fragment() {
         activity?.title = "Ver pedidos"
         var framgment = this
         GlobalScope.launch(Dispatchers.Main) {
-            var pedidos: MutableList<Pedidos> = mutableListOf()
-            var objetos_comprados: MutableList<Objetos> = mutableListOf()
-            var keys: MutableList<String> = mutableListOf()
-            var values: MutableList<String> = mutableListOf()
-            var total = ""
-            var fecha = ""
-            db.collection("pedidos").get().addOnSuccessListener {
-                for (item in it.documents) {
-                    if (item.get("email")
-                            .toString() == (activity as MainActivity).datosView.usuario.email
-                    ) {
-                        values.clear()
-                        keys.clear()
-                        objetos_comprados.clear()
-                        val datos_BBDD = item.getData()
-                        if (datos_BBDD != null) {
-                            for (key in datos_BBDD.keys) {
-                                keys.add(key.toString())
-                            }
-                            for (value in datos_BBDD.values) {
-                                values.add(value.toString())
-                            }
-                            for (i in 0 until keys.size) {
-                                if (keys.get(i) != "total" && keys.get(i) != "fecha" && keys.get(i) != "email") {
-                                    objetos_comprados.add(Objetos(keys.get(i), values.get(i)))
-                                } else {
-                                    if (keys.get(i) == "total") {
-                                        total = values.get(i)
-                                    } else if (keys.get(i) == "fecha") {
-                                        fecha = values.get(i)
-                                    }
-                                }
-                            }
-                            pedidos.add(Pedidos(fecha, objetos_comprados, total))
-                        }
-                    }
-                }
-            }
-            var clave: MutableList<String> = mutableListOf()
-            var valor: MutableList<String> = mutableListOf()
-            var objetos: HashMap<String, String> = hashMapOf()
-            db.collection("objetos").get().addOnSuccessListener {
-                for (item in it.documents) {
-                    val datos_BBDD = item.getData()
-                    if (datos_BBDD != null) {
-                        var contador = 0
-                        for (value in datos_BBDD.values) {
-                            if (contador == 0) {
-                                contador++
-                                valor.add(value.toString())
-                            } else {
-                                contador = 0
-                                clave.add(value.toString())
-                            }
-                        }
-                        for (i in 0 until clave.size) {
-                            objetos.put(clave.get(i), valor.get(i))
-                        }
-                    }
-                }
-            }
+            (activity as MainActivity).datosView.lista_pedidos_usuario =
+                BBDD().sacar_pedidos((activity as MainActivity).datosView.usuario.email)
+            var objetos = BBDD().sacar_precio()
             delay(2000L)
-            (activity as MainActivity).datosView.lista_pedidos_usuario = pedidos
-            if (pedidos.size > 0) {
+            if ((activity as MainActivity).datosView.lista_pedidos_usuario.size > 0) {
                 (activity as MainActivity).datosView.precio = objetos
                 miRecyclerView = binding.frag3RecyclerView
                 miRecyclerView.layoutManager = LinearLayoutManager(activity)
                 miRecyclerView.adapter = Adatador_ver_pedidos(
-                    pedidos, framgment
+                    (activity as MainActivity).datosView.lista_pedidos_usuario, framgment
                 )
             } else {
                 Toast.makeText(activity, "No existen pedidos que mostrar", Toast.LENGTH_SHORT)

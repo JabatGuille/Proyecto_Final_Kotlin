@@ -27,7 +27,6 @@ class Contenedor : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val db = FirebaseFirestore.getInstance()
     private val binding get() = _binding!!
     lateinit var miRecyclerView: RecyclerView
     override fun onCreateView(
@@ -51,16 +50,7 @@ class Contenedor : Fragment() {
         setHasOptionsMenu(true)
         activity?.title = "Hacer Pedido"
         GlobalScope.launch(Dispatchers.Main) {
-            var objetos: MutableList<Objetos> = mutableListOf()
-            db.collection("objetos").get().addOnSuccessListener {
-                for (item in it.documents) {
-                    var precio = item.getDouble("precio") as Double
-                    val objeto = Objetos(
-                        item.get("nombre") as String, precio.toString()
-                    )
-                    objetos.add(objeto)
-                }
-            }
+            var objetos = BBDD().sacar_objetos()
             delay(2000L)
             (activity as MainActivity).datosView.borrar_lista_pedido()
             miRecyclerView = binding.frag2RecyclerView
